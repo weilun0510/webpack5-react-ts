@@ -17,8 +17,7 @@ module.exports = {
     publicPath: '/', // 打包后文件的公共前缀路径
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.css$/, //匹配所有的 less 文件
         enforce: 'pre',
         include: [path.resolve(__dirname, '../src')],
@@ -46,7 +45,7 @@ module.exports = {
         use: ['thread-loader', 'babel-loader']
       },
       {
-        test:/\.(png|jpg|jpeg|gif|svg)$/,
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
         type: "asset",
         parser: {
           //转base64的条件
@@ -54,37 +53,38 @@ module.exports = {
             maxSize: 10 * 1024, // 10kb
           }
         },
-        generator:{ 
-          filename:'static/images/[name].[contenthash:6][ext]'
+        generator: {
+          filename: 'static/images/[name].[contenthash:6][ext]'
         },
       },
       {
-        test:/\.(woff2?|eot|ttf|otf)$/, // 匹配字体图标文件
+        test: /\.(woff2?|eot|ttf|otf)$/, // 匹配字体图标文件
         type: "asset", // type选择asset
         parser: {
           dataUrlCondition: {
             maxSize: 10 * 1024, // 小于10kb转base64位
           }
         },
-        generator:{ 
-          filename:'static/fonts/[name].[contenthash:6][ext]', // 文件输出目录和命名
+        generator: {
+          filename: 'static/fonts/[name].[contenthash:6][ext]', // 文件输出目录和命名
         },
       },
       {
-        test:/\.(mp4|webm|ogg|mp3|wav|flac|aac)$/, // 匹配媒体文件
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/, // 匹配媒体文件
         type: "asset", // type选择asset
         parser: {
           dataUrlCondition: {
             maxSize: 10 * 1024, // 小于10kb转base64位
           }
         },
-        generator:{ 
-          filename:'static/media/[name].[contenthash:6][ext]', // 文件输出目录和命名
+        generator: {
+          filename: 'static/media/[name].[contenthash:6][ext]', // 文件输出目录和命名
         },
       }
     ]
   },
   resolve: {
+    // 高频出现的文件后缀放在前面
     extensions: ['.js', '.tsx', '.ts'],
     alias: {
       '@': path.resolve(__dirname, '../src')
